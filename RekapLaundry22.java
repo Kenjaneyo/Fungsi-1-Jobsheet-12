@@ -67,29 +67,45 @@ public class RekapLaundry22 {
                  System.out.println("Total pendapatan: Rp" + totalSemua);
             }
             public static void main(String[] args) {
-        String[] layanan = {"Cuci Kering", "Cuci Setrika", "Setrika Saja", "Express"};
-        int[] harga = {6000, 8000, 5000, 12000};
-        String[] hari = {"Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"};
-        int[][] data = new int[4][6];
+    System.out.print("Jumlah layanan: ");
+    int jmlLayanan = sc.nextInt();
+    System.out.print("Jumlah hari: ");
+    int jmlHari = sc.nextInt();
+    sc.nextLine();
 
-        inputData(data, layanan, hari);
+    String[] layanan = new String[jmlLayanan];
+    int[] harga = new int[jmlLayanan];
+    for (int i = 0; i < jmlLayanan; i++) {
+        System.out.print("Nama layanan ke-" + (i + 1) + ": ");
+        layanan[i] = sc.nextLine();
+        System.out.print("Harga per kg " + layanan[i] + ": ");
+        harga[i] = sc.nextInt();
+        sc.nextLine();
+    }
 
-        System.out.println("\n=== Rekap Cucian (kg) ===");
-        tampilTabel(data, layanan, harga, hari);
+    String[] hari = new String[jmlHari];
+    for (int j = 0; j < jmlHari; j++) {
+        hari[j] = "Hari ke-" + (j + 1);
+    }
 
-        System.out.println();
-        for (int i = 0; i < layanan.length; i++) {
-            System.out.println("Total " + layanan[i] + ": " + totalPerLayanan(data, i) + " kg");
-        }
+    int[][] data = new int[jmlLayanan][jmlHari];
+    inputData(data, layanan, hari);
 
-        System.out.println();
-        tampilLayananTertinggi(data, layanan);
+    System.out.println("\n=== Rekap Cucian (kg) ===");
+    tampilTabel(data, layanan, harga, hari);
 
-        int idxHari = hariTersibuk(data);
-        System.out.println("Hari tersibuk: " + hari[idxHari]);
+    System.out.println();
+    for (int i = 0; i < layanan.length; i++) {
+        System.out.println("Total " + layanan[i] + ": " + totalPerLayanan(data, i) + " kg");
+    }
 
-        System.out.println("\n=== Pendapatan ===");
-        tampilPendapatan(data, layanan, harga);
-        }
-}
+    System.out.println();
+    tampilLayananTertinggi(data, layanan);
+
+    int idxHari = hariTersibuk(data);
+    System.out.println("Hari tersibuk: " + hari[idxHari]);
+
+    System.out.println("\n=== Pendapatan ===");
+    tampilPendapatan(data, layanan, harga);
+}}
 
